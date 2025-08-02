@@ -15,22 +15,22 @@ const pushNotification = (posTop, posRight, title, description, type) => {
     typeClass = 'warning';
   }
 
+  const uniqueId = `notification-${Date.now()}-${Math.random()}`;
+
   document.querySelector('body').insertAdjacentHTML(
     'beforeend',
     `
-      <div class="notification ${typeClass}" style="top: ${posTop}px; right: ${posRight}px;">
+      <div id="${uniqueId}" class="notification ${typeClass}" style="top: ${posTop}px; right: ${posRight}px;">
         <h2 class="title">${title}</h2>
         <p>${description}</p>
       </div>
     `,
   );
 
-  const notifications = document.querySelectorAll('.notification');
+  const notification = document.getElementById(uniqueId);
 
   setTimeout(() => {
-    notifications.forEach((elem) => {
-      elem.style.display = 'none';
-    });
+    notification.style.display = 'none';
   }, 2000);
 };
 
